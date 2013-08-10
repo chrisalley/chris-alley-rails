@@ -1,0 +1,34 @@
+<%= form_for @qualification, :html => { :multipart => true } do |f| %>  
+  <%= render "shared/error_messages", :target => @qualification %>
+  <div>
+    <%= f.label :name, "Name" %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :education_provider, "Education Provider" %><br />
+    <%= f.text_field :education_provider %>
+  </div>
+  <div>
+    <%= f.label :year_completed, "Year Completed "%><br />
+    <%= f.text_field :year_completed %>
+  </div>
+  <div>
+    <%= f.label :content, "Content" %><br />
+    <%= f.text_area :content %>  
+  </div>
+  <div>
+	<%= f.label :certificate, "Certificate" %><br />
+    <% if @qualification.certificate? %>
+      <%= image_tag @qualification.certificate_url(:small) %><br />
+      File has already been uploaded. Replace file?<br />
+    <% end %>
+    <%= f.file_field :certificate %>
+    <%= f.hidden_field :certificate_cache %>
+  </div>
+  <div>
+    <%= f.check_box :publish %> <%= f.label :publish, "Publish?" %>
+  </div>
+  <div>
+    <%= f.submit %>  
+  </div>
+<% end %>

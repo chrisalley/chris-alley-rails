@@ -1,0 +1,18 @@
+<% title "Reset Password" %>
+
+<p>Hi, <%= @user.name %>. Type in your desired password twice to reset it.</p>
+
+<% form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+  <%= render "shared/error_messages", :target => @user %>
+  <div>  
+    <%= f.label :password %><br />  
+    <%= f.password_field :password %>  
+  </div>  
+  <div>  
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>  
+  </div>
+  <div>
+    <%= f.submit "Update Password" %>
+  </div>  
+<% end %>

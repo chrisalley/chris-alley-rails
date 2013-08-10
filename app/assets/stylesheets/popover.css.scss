@@ -1,0 +1,32 @@
+div#popover {
+  display: none;
+  position: fixed;
+  border-radius: 10px;
+  width: 980px;
+  float: left;
+  margin-left: 10px;
+  background-color: #EEEEEE;
+}
+
+div#popover img {
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
+}
+
+div#popover button {
+  padding: 10px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #000000;
+  font-family: "Helvetica Neue", Helvetica, Arial;
+}
+
+div#popover button:hover {
+  color: #777777;
+}

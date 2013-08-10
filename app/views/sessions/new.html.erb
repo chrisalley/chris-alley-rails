@@ -1,0 +1,20 @@
+<% title "Log In" %>  
+
+<%= form_tag sessions_path do %>  
+  <div>
+    <%= label_tag :name_or_email_address %><br />  
+    <%= text_field_tag :name_or_email_address %>  
+  </div>
+  <div>
+    <%= label_tag :password %><br />  
+    <%= password_field_tag :password %>  
+  </div>
+  <div>
+    <%= check_box_tag :remember_me %> <%= label_tag :remember_me, "Remember Me?" %>
+  </div>
+  <div>
+    <%= submit_tag "Log In" %>
+  </div>
+<% end %>
+
+<p><%= link_to "Forgotten Password?", new_password_reset_path %></p>

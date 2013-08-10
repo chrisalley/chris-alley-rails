@@ -1,0 +1,24 @@
+<% title "Industry Experience" %>
+
+<% if can? :create, Job %>
+  <p><%= link_to 'New Job', new_job_path %></p>
+<% end %>
+
+<% unless @jobs.empty? %>
+  <% @jobs.each do |job| %>
+    <h3><%= job.name %></h3>
+  	<% if can? :manage, job %>
+  	  <ul class="administration">
+  	    <li><%= link_to 'Edit Job', edit_job_path(job) %></li>
+  	    <li><%= link_to 'Delete Job', job, :confirm => 'Are you sure you want to delete this job?', :method => :delete %></li>
+  	    <li><% unless job.publish %><span class="unpublished">Unpublished</span><% end %></li>
+  	  </ul>
+  	<% end %>
+  	<p><%= job.organisation %></p>
+  	<p><%= Date::MONTHNAMES[job.month_started] %> <%= job.year_started.to_s %> - <%= Date::MONTHNAMES[job.month_finished] %> <%= job.year_finished.to_s %></p>
+    <%= raw markdown_to_html job.content %>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= paginate @jobs %>

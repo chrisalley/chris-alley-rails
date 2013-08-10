@@ -1,0 +1,45 @@
+$good-text: #00FF44;
+$alert-text: #FFAA00;
+$bad-text: #FF2200;
+
+a {
+  color: #999999;
+}
+
+a:hover {
+  color: #333333;
+}
+
+ul.administration {
+  padding-left: 0;
+}
+
+ul.administration li {
+  display: inline;
+  padding-right: 10px;
+}
+
+p.links {
+  margin-bottom: 0;
+}
+
+.unpublished {
+  color: $alert-text;
+}
+
+div#flash_notice {
+  color: $good-text;
+}
+
+div#flash_alert {
+  color: $bad-text;
+}
+
+div#errors {
+  color: $bad-text;
+  font-size: 14px;
+}
+
+div#errors h2 {
+  font-size: 14px;
+}

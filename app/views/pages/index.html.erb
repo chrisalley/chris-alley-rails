@@ -1,0 +1,15 @@
+<% title "Pages" %>
+
+<% if can? :create, Page %>
+  <p><%= link_to 'New Page', new_page_path %></p>
+<% end %>
+
+<% unless @pages.empty? %>
+  <ul>
+    <% @pages.each do |page| %>
+      <li><%= link_to page.name, page %><% unless page.publish %> - <span class="unpublished">Unpublished</span><% end %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= paginate @pages %>

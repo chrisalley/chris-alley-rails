@@ -1,0 +1,28 @@
+<% title "Users" %>
+
+<% if can? :manage, User %>
+  <ul class="administration">
+    <li><%= link_to 'Register New User', new_user_path %></li>
+  </ul>
+<% end %>
+
+<% unless @users.empty? %>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email Address</th>
+      <th>Role</th>
+      <th>Edit Profile</th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email_address %></td>
+        <td><%= user.role.humanize %></td>
+        <td><%= link_to 'Edit Profile', edit_user_path(user) %>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<%= paginate @users %>

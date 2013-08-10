@@ -1,0 +1,32 @@
+<% title "Edit Profile" %>
+
+<%= form_for @user do |f| %>
+  <%= render "shared/error_messages", :target => @user %>
+  <div>
+    <% if current_user.role? :administrator %>
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :email_address %><br />
+    <%= f.email_field :email_address %>  
+  </div>
+  <div>  
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div>  
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <% if current_user.role? :administrator %>
+    <div>
+      <%= f.label :role, "Role" %><br />
+      <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
+    </div>
+  <% end %>
+  <div>
+    <%= f.submit "Update Profile" %>
+  </div>
+<% end %>
