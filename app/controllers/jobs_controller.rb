@@ -1,5 +1,5 @@
-class JobsController < ApplicationController
-  load_resource :find_by => :url
+class JobsController < ApplicationController  
+  load_resource find_by: :url
   authorize_resource
   
   def index
@@ -9,7 +9,7 @@ class JobsController < ApplicationController
   def create 
     @job = Job.new(job_params)
     if @job.save
-      redirect_to jobs_path, :notice => "Successfully created job."
+      redirect_to jobs_path, notice: "Successfully created job."
     else
       render 'new'
     end
@@ -17,7 +17,7 @@ class JobsController < ApplicationController
   
   def update
     if @job.update_attributes(job_params)
-      redirect_to jobs_path, :notice => "Successfully updated job."
+      redirect_to jobs_path, notice: "Successfully updated job."
     else
       render 'edit'
     end
@@ -25,10 +25,10 @@ class JobsController < ApplicationController
 
   def destroy
     @job.destroy
-    redirect_to jobs_path, :notice => "Successfully destroyed job."
+    redirect_to jobs_path, notice: "Successfully destroyed job."
   end
   
-private
+  private
 
   def job_params
     params.require(:job).permit(:name, :organisation, :month_started, :month_finished, :year_started, :year_finished, :content, :publish)

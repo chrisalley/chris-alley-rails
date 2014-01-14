@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  load_resource :find_by => :url
+  load_resource find_by: :url
   authorize_resource
   
   def index
@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   def create 
     @page = Page.new(page_params)
     if @page.save
-      redirect_to @page, :notice => "Successfully created page."
+      redirect_to @page, notice: "Successfully created page."
     else
       render 'new'
     end
@@ -17,7 +17,7 @@ class PagesController < ApplicationController
   
   def update
     if @page.update_attributes(page_params)
-      redirect_to @page, :notice => "Successfully updated page."
+      redirect_to @page, notice: "Successfully updated page."
     else
       render 'edit'
     end
@@ -25,10 +25,10 @@ class PagesController < ApplicationController
 
   def destroy
     @page.destroy
-    redirect_to pages_path, :notice => "Successfully destroyed page."
+    redirect_to pages_path, notice: "Successfully destroyed page."
   end
   
-private
+  private
 
   def page_params
     params.require(:page).permit(:name, :content, :publish)

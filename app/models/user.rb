@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  acts_as_url :name, :sync_url => true
+  acts_as_url :name, sync_url: true
   
   def to_param
     url 
@@ -9,9 +9,9 @@ class User < ActiveRecord::Base
   before_create :set_default_administrator
   before_create { generate_token(:authentication_token) }
   
-  validates :name, :presence => true, :length => { :in => 1..50 }, :uniqueness => true
-  validates :email_address, :presence => true, :length => { :in => 1..50 }, :uniqueness => true
-  validates_presence_of :password, :on => :create
+  validates :name, presence: true, length: { :in => 1..50 }, uniqueness: true
+  validates :email_address, presence: true, length: { :in => 1..50 }, uniqueness: true
+  validates_presence_of :password, on: :create
   
   ROLES = %w[administrator registered guest]
   

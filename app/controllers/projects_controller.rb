@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  load_resource :find_by => :url
+  load_resource find_by: :url
   authorize_resource
   
   def index
@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
   def create 
     @project = Project.new(project_params)
     if @project.save
-      redirect_to projects_path, :notice => "Successfully created project."
+      redirect_to projects_path, notice: "Successfully created project."
     else
       render 'new'
     end
@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
   
   def update
     if @project.update_attributes(project_params)
-      redirect_to projects_path, :notice => "Successfully updated project."
+      redirect_to projects_path, notice: "Successfully updated project."
     else
       render 'edit'
     end
@@ -25,10 +25,10 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to projects_path, :notice => "Successfully destroyed project."
+    redirect_to projects_path, notice: "Successfully destroyed project."
   end
   
-private
+  private
 
   def project_params
     params.require(:project).permit(:name, :content, :screenshot, :screenshot_cache, :website_url, :download_url, :source_code_url, :priority, :publish)

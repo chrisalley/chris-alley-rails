@@ -1,5 +1,5 @@
-<%= form_for @project, :html => { :multipart => true } do |f| %>  
-  <%= render "shared/error_messages", :target => @project %>
+<%= form_for @project, html: { multipart: true } do |f| %>  
+  <%= render "shared/error_messages", target: @project %>
   <div>
     <%= f.label :name, "Name" %><br />
     <%= f.text_field :name %>

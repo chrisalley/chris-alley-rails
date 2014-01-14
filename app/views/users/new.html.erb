@@ -1,7 +1,7 @@
 <% title "Register" %>
   
 <%= form_for @user do |f| %>  
-  <%= render "shared/error_messages", :target => @user %>     
+  <%= render "shared/error_messages", target: @user %>     
   <div>
     <%= f.label :name %><br />  
     <%= f.text_field :name %>  

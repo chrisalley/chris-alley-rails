@@ -10,7 +10,7 @@
   	<% if can? :manage, project %>
   	  <ul class="administration">
   	    <li><%= link_to 'Edit Project', edit_project_path(project) %></li>
-  	    <li><%= link_to 'Delete Project', project, :confirm => 'Are you sure you want to delete this project?', :method => :delete %></li>
+  	    <li><%= link_to 'Delete Project', project, confirm: 'Are you sure you want to delete this project?', method: :delete %></li>
   	    <li><% unless project.publish %><span class="unpublished">Unpublished</span><% end %></li>
   	  </ul>
   	<% end %>
@@ -24,7 +24,7 @@
     <% unless project.source_code_url.blank? %>
       <p><%= link_to "View Source Code", project.source_code_url %></p>
     <% end %>
-    <a href="#" class="popover"><%= image_tag project.screenshot_url(:medium), :data => { :src => project.screenshot_url(:large) } %></a>
+    <a href="#" class="popover"><%= image_tag project.screenshot_url(:medium), data: { src: project.screenshot_url(:large) } %></a>
   <% end %>
 <% end %>
 

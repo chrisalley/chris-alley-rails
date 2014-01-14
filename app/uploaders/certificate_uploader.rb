@@ -8,15 +8,15 @@ class CertificateUploader < CarrierWave::Uploader::Base
   end
 
   version :small do
-    process :resize_to_fit => [300, 300]
+    process resize_to_fit: [300, 300]
   end
   
   version :medium do
-    process :resize_to_fit => [600, 600]
+    process resize_to_fit: [600, 600]
   end
 
   version :large do
-    process :resize_to_fit => [900, 900]
+    process resize_to_fit: [900, 900]
   end
 
   def extension_white_list

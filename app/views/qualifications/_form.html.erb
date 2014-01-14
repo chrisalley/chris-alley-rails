@@ -1,5 +1,5 @@
-<%= form_for @qualification, :html => { :multipart => true } do |f| %>  
-  <%= render "shared/error_messages", :target => @qualification %>
+<%= form_for @qualification, html: { multipart: true } do |f| %>  
+  <%= render "shared/error_messages", target: @qualification %>
   <div>
     <%= f.label :name, "Name" %><br />
     <%= f.text_field :name %>

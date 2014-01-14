@@ -7,7 +7,7 @@
 <% if can? :manage, @page %>
   <ul class="administration">
     <li><%= link_to 'Edit Page', edit_page_path(@page) %></li>
-    <li><%= link_to 'Delete Page', @page, :confirm => 'Are you sure you want to delete this page?', :method => :delete %></li>
+    <li><%= link_to 'Delete Page', @page, confirm: 'Are you sure you want to delete this page?', method: :delete %></li>
   </ul>
 <% end %>  
 
