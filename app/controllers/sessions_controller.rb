@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  
   def create
     user = User.find_by_name_or_email_address(params[:name_or_email_address])
     if user && user.authenticate(params[:password])
@@ -10,7 +11,7 @@ class SessionsController < ApplicationController
       redirect_to root_url, notice: "Logged in!"
     else
       flash.now.alert = "Invalid email address or password."
-      render "new"
+      render :new
     end
   end
 
@@ -18,4 +19,5 @@ class SessionsController < ApplicationController
     cookies.delete(:authentication_token)
     redirect_to root_url, notice: "Logged out!"  
   end
+  
 end

@@ -9,6 +9,7 @@ body {
     width: 1000px;
     margin: 0 auto;
     margin-top: -10px;
+    border: 0;
     
     div#container {
       background-color: #EEEEEE;
@@ -17,7 +18,7 @@ body {
       border-radius: 5px;
       padding: 50px;
       
-      div#header {
+      header {
         margin-top: -10px;
         width: 600px;
         
@@ -30,7 +31,7 @@ body {
         }
       }
       
-      div#navigation {
+      nav {
         margin-top: 30px;
         margin-bottom: 60px;
         width: 600px;
@@ -45,7 +46,7 @@ body {
         }
       }
       
-      div#content {
+      article {
         width: 600px;
 
         h2 {
@@ -67,7 +68,7 @@ body {
         }
       }
       
-      div#footer {
+     footer {
         margin-top: 40px;
         margin-bottom: -15px;
         width: 600px;
