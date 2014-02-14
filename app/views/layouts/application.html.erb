@@ -4,24 +4,24 @@
     <title>Chris Alley | <%= yield(:title) %></title>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-    <link rel="openid.server" href="http://www.myopenid.com/server">
-    <link rel="openid.delegate" href="http://chrisalley.myopenid.com/">
     <%= csrf_meta_tags %>
   </head>
   <body>
     <div id="overall">
       <%= render 'shared/popover' %>
       <div id="container">
-        <div id="header">
+        <header>
           <h1>Chris Alley</h1>
-          <p>I am a New Zealand based web developer and database administrator with over three years of industry experience. I have worked as a Delphi developer, SQL Server DBA, PHP web developer, and I am self taught in the Ruby on Rails web framework.</p>
-        </div>
-        <div id="navigation">
+          <p>I am an experienced New Zealand based web developer and database administrator. I have previously worked as a Delphi developer, SQL Server DBA, PHP web developer. I am currently employed as a Ruby on Rails web developer.</p>
+        </header>
+        <nav>
           <ul>
   	        <li><%= link_to "Development Portfolio", root_url %></li>
             <li><%= link_to "Industry Experience", jobs_path %></li>
             <li><%= link_to "IT Qualifications", qualifications_path %></li>
-            <li><%= link_to "Contact Details", "/contact-details" %></li>
+            <% Page.all.each do |page| %>
+              <li><%= link_to page.name, "/#{page.url}" %></li>
+            <% end %>  
           </ul>
           <% if current_user %>
             <ul>
@@ -31,17 +31,17 @@
               <li><%= link_to "Users", users_path %></li>
             </ul>
           <% end %>
-        </div>
-        <div id="content">
+        </nav>
+        <article>
           <h2><%= yield(:title) %></h2>
           <% flash.each do |name, msg| %>
             <%= content_tag :div, msg, id: "flash_#{name}" %>
           <% end %>
           <%= yield %>
-        </div>
-        <div id="footer">
-          <p>Copyright &copy; Chris Alley, 2013. <% if User.count == 0 %><%= link_to "Register New User", register_path %>.<% end %></p>
-        </div>
+        </article>
+        <footer>
+          <p>Copyright &copy; Chris Alley, <%= Time.now.year %>. <% if User.count == 0 %><%= link_to "Register New User", register_path %>.<% end %></p>
+        </footer>
       </div>
     </div>
   </body>

@@ -1,4 +1,5 @@
 class PasswordResetsController < ApplicationController
+  
   def create
     user = User.find_by_name_or_email_address(params[:name_or_email_address])
     user.send_password_reset if user
@@ -19,4 +20,5 @@ class PasswordResetsController < ApplicationController
       render :edit
     end
   end
+  
 end
