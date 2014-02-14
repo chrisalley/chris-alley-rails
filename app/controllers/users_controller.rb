@@ -1,19 +1,9 @@
 class UsersController < ApplicationController
+  load_resource find_by: :url
+  authorize_resource
   
   def index
     @users = User.order(:name).page(params[:page]) 
-  end
-  
-  def show
-    @user = User.find_by_url(params[:id])
-  end
-  
-  def new
-    @user = User.new
-  end
-  
-  def edit
-    @user = User.find_by_url(params[:id])
   end
 
   def create
@@ -21,24 +11,21 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to users_path, notice: "Registered!"
     else  
-      render :new
+      render 'new' 
     end  
   end
 
   def update
-    @user = User.find_by_url(params[:id])
     if @user.update_attributes(user_params)
       redirect_to users_path, notice: "Successfully updated profile."
     else
-      render :edit
+      render 'edit'
     end
   end
 
   def destroy    
-    @user = User.find_by_url(params[:id])
-    if @user.destroy
-      redirect_to users_path, notice: "Successfully destroyed user."
-    end
+    @user.destroy
+    redirect_to users_path, notice: "Successfully destroyed user."
   end
   
   private
@@ -46,5 +33,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email_address, :password, :password_confirmation, :role)
   end
-
 end

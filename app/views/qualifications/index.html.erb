@@ -1,16 +1,18 @@
 <% title "IT Qualifications" %>
 
-<p><%= link_to 'New Qualification', new_qualification_path %></p>
+<% if can? :create, Qualification %>
+  <p><%= link_to 'New Qualification', new_qualification_path %></p>
+<% end %>
 
 <% unless @qualifications.empty? %>
   <% @qualifications.each do |qualification| %>
     <h3><%= qualification.name %></h3>
-
+	  <% if can? :manage, qualification %>
 	    <ul class="administration">
 	      <li><%= link_to 'Edit Qualification', edit_qualification_path(qualification) %></li>
 	      <li><%= link_to 'Delete Qualification', qualification, confirm: 'Are you sure you want to delete this qualification?', method: :delete %></li>
 	    </ul>
-
+	  <% end %>
 	  <% unless qualification.publish %><span class="unpublished">Unpublished</span><% end %>
 	  <p><%= qualification.education_provider %></p>
 	  <p><%= qualification.year_completed.to_s %></p>

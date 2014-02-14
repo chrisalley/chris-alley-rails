@@ -1,19 +1,9 @@
 class PagesController < ApplicationController
+  load_resource find_by: :url
+  authorize_resource
   
   def index
-    @pages = Page.order(:name).page(params[:page]).per(100)
-  end
-  
-  def show
-    @page = Page.find_by_url(params[:id])
-  end
-  
-  def new
-    @page = Page.new
-  end
-  
-  def edit
-    @page = Page.find_by_url(params[:id])
+    @pages = Page.accessible_by(current_ability).order(:name).page(params[:page]).per(100)
   end
 
   def create 
@@ -21,30 +11,26 @@ class PagesController < ApplicationController
     if @page.save
       redirect_to @page, notice: "Successfully created page."
     else
-      render :new
+      render 'new'
     end
   end
   
   def update
-    @page = Page.find_by_url(params[:id])
     if @page.update_attributes(page_params)
       redirect_to @page, notice: "Successfully updated page."
     else
-      render :edit
+      render 'edit'
     end
   end
 
   def destroy
-    @page = Page.find_by_url(params[:id])
-    if @page.destroy
-      redirect_to pages_path, notice: "Successfully destroyed page."
-    end
+    @page.destroy
+    redirect_to pages_path, notice: "Successfully destroyed page."
   end
   
   private
 
   def page_params
     params.require(:page).permit(:name, :content, :publish)
-  end
-  
+  end  
 end

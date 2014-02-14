@@ -1,8 +1,10 @@
 <% title "Users" %>
 
+<% if can? :manage, User %>
   <ul class="administration">
     <li><%= link_to 'Register New User', new_user_path %></li>
   </ul>
+<% end %>
 
 <% unless @users.empty? %>
   <table>

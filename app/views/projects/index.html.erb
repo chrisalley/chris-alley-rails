@@ -1,17 +1,19 @@
 <% title "Development Portfolio" %>
 
-<p><%= link_to 'New Project', new_project_path %></p>
+<% if can? :create, Project %>
+  <p><%= link_to 'New Project', new_project_path %></p>
+<% end %>
 
 <% unless @projects.empty? %>
   <% @projects.each do |project| %>
     <h3><%= project.name %></h3>    
-
+  	<% if can? :manage, project %>
   	  <ul class="administration">
   	    <li><%= link_to 'Edit Project', edit_project_path(project) %></li>
   	    <li><%= link_to 'Delete Project', project, confirm: 'Are you sure you want to delete this project?', method: :delete %></li>
   	    <li><% unless project.publish %><span class="unpublished">Unpublished</span><% end %></li>
   	  </ul>
-
+  	<% end %>
     <%= raw markdown_to_html project.content %>
     <% unless project.website_url.blank? %>
       <p><%= link_to "Visit Website", project.website_url %></p>
