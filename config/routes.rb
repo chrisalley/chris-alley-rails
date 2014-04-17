@@ -3,7 +3,7 @@ Chrisalley::Application.routes.draw do
   get 'log-out', to: "sessions#destroy", as: :log_out
   get 'register', to: "users#new", as: :register
   resources :projects, path: 'development-portfolio'
-  resources :qualifications, path: 'it-qualifications'
+  resources :qualifications, path: 'qualifications'
   resources :jobs, path: 'industry-experience'
   resources :sessions
   resources :password_resets, path: 'password-resets'

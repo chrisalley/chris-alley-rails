@@ -1,8 +1,8 @@
 <% title "Users" %>
 
-  <ul class="administration">
-    <li><%= link_to 'Register New User', new_user_path %></li>
-  </ul>
+<% if policy(User).new? %>
+  <p><%= link_to 'Register New User', new_user_path %></p>
+<% end %>
 
 <% unless @users.empty? %>
   <table>

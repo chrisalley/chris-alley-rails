@@ -46,7 +46,7 @@ body {
         }
       }
       
-      article {
+      section {
         width: 600px;
 
         h2 {
@@ -59,16 +59,36 @@ body {
           margin-bottom: 20px;
         }
         
-        p {
-          margin-top: 20px;
-        }
+        ul {
+          list-style-type: none;
+          padding: 0;
 
-        img {
-          margin-top: 12px;
+          li {
+            p {
+              margin-top: 20px;
+            }
+
+            img {
+              margin-top: 12px;
+            }
+
+            ul.administration {
+              margin-left: -20px;
+            }
+
+            ul {
+              list-style-type: disc;
+              padding-left: 20px;
+            }
+
+            ol {
+              padding-left: 20px;
+            }
+          }
         }
       }
       
-     footer {
+      footer {
         margin-top: 40px;
         margin-bottom: -15px;
         width: 600px;

@@ -1,23 +1,19 @@
 class UsersController < ApplicationController
   
+  before_action :load_user, except: [:index, :new, :create]
+
   def index
-    @users = User.order(:name).page(params[:page]) 
-  end
-  
-  def show
-    @user = User.find_by_url(params[:id])
+    @users = policy_scope(User.order(:name).page(params[:page]))
   end
   
   def new
     @user = User.new
+    authorize @user
   end
   
-  def edit
-    @user = User.find_by_url(params[:id])
-  end
-
   def create
     @user = User.new(user_params)
+    authorize @user
     if @user.save
       redirect_to users_path, notice: "Registered!"
     else  
@@ -26,7 +22,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find_by_url(params[:id])
     if @user.update_attributes(user_params)
       redirect_to users_path, notice: "Successfully updated profile."
     else
@@ -35,16 +30,25 @@ class UsersController < ApplicationController
   end
 
   def destroy    
-    @user = User.find_by_url(params[:id])
-    if @user.destroy
-      redirect_to users_path, notice: "Successfully destroyed user."
-    end
+    @user.destroy
+    redirect_to users_path, notice: "Successfully destroyed user."
   end
   
   private
 
   def user_params
-    params.require(:user).permit(:name, :email_address, :password, :password_confirmation, :role)
+    params.require(:user).permit(
+      :name,
+      :email_address,
+      :password,
+      :password_confirmation,
+      :role
+    )
+  end
+
+  def load_user
+    @user = User.find_by url: params[:id]
+    authorize @user
   end
 
 end

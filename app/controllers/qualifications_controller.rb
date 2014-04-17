@@ -1,23 +1,19 @@
 class QualificationsController < ApplicationController
+
+  before_action :load_qualification, except: [:index, :new, :create]
   
   def index
-    @qualifications = Qualification.order("year_completed desc").page(params[:qualification]).per(100)
+    @qualifications = policy_scope(Qualification.order("year_completed desc").page(params[:qualification]).per(100))
   end
-  
-  def show
-    @qualification = Qualification.find_by_url(params[:id])
-  end
-  
+
   def new
     @qualification = Qualification.new
-  end
-  
-  def edit
-    @qualification = Qualification.find_by_url(params[:id])
+    authorize @qualification
   end
 
   def create 
     @qualification = Qualification.new(qualification_params)
+    authorize @qualification
     if @qualification.save
       redirect_to qualifications_path, notice: "Successfully created qualification."
     else
@@ -26,7 +22,6 @@ class QualificationsController < ApplicationController
   end
   
   def update
-    @qualification = Qualification.find_by_url(params[:id])
     if @qualification.update_attributes(qualification_params)
       redirect_to qualifications_path, notice: "Successfully updated qualification."
     else
@@ -35,16 +30,27 @@ class QualificationsController < ApplicationController
   end
 
   def destroy
-    @qualification = Qualification.find_by_url(params[:id])
-    if @qualification.destroy
-      redirect_to qualifications_path, notice: "Successfully destroyed qualification."
-    end
+    @qualification.destroy
+    redirect_to qualifications_path, notice: "Successfully destroyed qualification."
   end
   
   private
 
   def qualification_params
-    params.require(:qualification).permit(:name, :education_provider, :year_completed, :content, :certificate, :certificate_cache, :publish)
+    params.require(:qualification).permit(
+      :name,
+      :education_provider,
+      :year_completed,
+      :content,
+      :certificate,
+      :certificate_cache,
+      :publish
+    )
+  end
+
+  def load_qualification
+    @qualification = Qualification.find_by url: params[:id]
+    authorize @qualification
   end
   
 end

@@ -1,16 +1,10 @@
 class User < ActiveRecord::Base
-  acts_as_url :name, sync_url: true
+
+  include Authenticatable
+  include Sluggable
   
-  def to_param
-    url 
-  end
- 
-  has_secure_password
-  before_create :set_default_administrator
-  before_create { generate_token(:authentication_token) }
-  
-  validates :name, presence: true, length: { :in => 1..50 }, uniqueness: true
-  validates :email_address, presence: true, length: { :in => 1..50 }, uniqueness: true
+  validates :name, presence: true, length: { in: 1..50 }, uniqueness: true
+  validates :email_address, presence: true, length: { in: 1..50 }, uniqueness: true
   validates_presence_of :password, on: :create
   
   ROLES = %w[administrator registered guest]
@@ -18,16 +12,6 @@ class User < ActiveRecord::Base
   # Returns true if user belongs to the specified role.
   def role?(role)
     self.role == role.to_s ? true : false
-  end
-  
-  # Sets default administrator if user is the first user.
-  def set_default_administrator
-    User.count < 1 ? self.role = :administrator.to_s : self.role = :registered.to_s
-  end
-  
-  # Finds the user by either the user's name or email address.
-  def self.find_by_name_or_email_address(name_or_email_address)
-    user = find_by_name(name_or_email_address) || user = find_by_email_address(name_or_email_address)
   end
   
   # Generates and emails password reset token.
@@ -44,4 +28,5 @@ class User < ActiveRecord::Base
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
   end
+  
 end

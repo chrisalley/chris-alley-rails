@@ -1,6 +1,8 @@
 <% title "Pages" %>
 
-<p><%= link_to 'New Page', new_page_path %></p>
+<% if policy(Page).new? %>
+  <p><%= link_to 'New Page', new_page_path %></p>
+<% end %>
 
 <% unless @pages.empty? %>
   <ul>

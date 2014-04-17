@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   
+  after_action :verify_authorized, except: [:new, :create, :destroy]
+
   def create
     user = User.find_by_name_or_email_address(params[:name_or_email_address])
     if user && user.authenticate(params[:password])

@@ -1,4 +1,6 @@
 class PasswordResetsController < ApplicationController
+
+  after_action :verify_authorized, except: [:create, :edit, :update]
   
   def create
     user = User.find_by_name_or_email_address(params[:name_or_email_address])
