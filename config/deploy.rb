@@ -10,7 +10,7 @@ set :use_sudo, false
 default_run_options[:pty] = true
 
 set :scm, "git"
-set :repository,  "https://uriptical@github.com/uriptical/chris-alley.git"
+set :repository, "https://chrisalley@github.com/chrisalley/chris-alley.git"
 set :branch, "master"
 
 set :shared_children, shared_children + %w{public/uploads}
