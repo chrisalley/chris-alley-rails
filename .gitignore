@@ -3,7 +3,7 @@ log/*
 tmp/*
 .bundle
 config/database.yml
-config/application.yml
+config/secrets.yml
 db/*.sqlite3
 public/uploads/*
 public/assets/*

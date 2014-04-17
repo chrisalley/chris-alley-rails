@@ -1,13 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'yaml'
-APP_CONFIG = YAML.load(File.read(File.expand_path('../application.yml', __FILE__)))
-
 require 'rails/all'
 
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env)
+Bundler.require(*Rails.groups)
 
 module Chrisalley
   class Application < Rails::Application
