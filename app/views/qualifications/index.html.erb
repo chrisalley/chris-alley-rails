@@ -12,7 +12,7 @@
         <% if policy(qualification).edit? && policy(qualification).destroy? %>
           <ul class="administration">
             <li><%= link_to 'Edit Qualification', edit_qualification_path(qualification) %></li>
-            <li><%= link_to 'Delete Qualification', qualification, confirm: 'Are you sure you want to delete this qualification?', method: :delete %></li>
+            <li><%= link_to 'Delete Qualification', qualification, data: { confirm: 'Are you sure you want to delete this qualification?' }, method: :delete %></li>
             <li><% unless qualification.publish %><span class="unpublished">Unpublished</span><% end %></li>
           </ul>
         <% end %>
