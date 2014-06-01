@@ -1,5 +1,4 @@
 class Project < ActiveRecord::Base
-
   include Sluggable
 
   validates :name, presence: true, length: { in: 1..75 }, uniqueness: true
@@ -7,5 +6,4 @@ class Project < ActiveRecord::Base
   validates :priority, presence: true, numericality: { only_integer: true }
 
   mount_uploader :screenshot, ScreenshotUploader
-
 end

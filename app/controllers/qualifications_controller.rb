@@ -1,7 +1,6 @@
 class QualificationsController < ApplicationController
-
   before_action :load_qualification, except: [:index, :new, :create]
-  
+
   def index
     @qualifications = policy_scope(Qualification.order("year_completed desc").page(params[:qualification]).per(100))
   end
@@ -11,7 +10,7 @@ class QualificationsController < ApplicationController
     authorize @qualification
   end
 
-  def create 
+  def create
     @qualification = Qualification.new(qualification_params)
     authorize @qualification
     if @qualification.save
@@ -20,7 +19,7 @@ class QualificationsController < ApplicationController
       render :new
     end
   end
-  
+
   def update
     if @qualification.update_attributes(qualification_params)
       redirect_to qualifications_path, notice: "Successfully updated qualification."
@@ -33,7 +32,7 @@ class QualificationsController < ApplicationController
     @qualification.destroy
     redirect_to qualifications_path, notice: "Successfully destroyed qualification."
   end
-  
+
   private
 
   def qualification_params
@@ -52,5 +51,4 @@ class QualificationsController < ApplicationController
     @qualification = Qualification.find_by url: params[:id]
     authorize @qualification
   end
-  
 end

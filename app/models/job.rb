@@ -1,5 +1,4 @@
 class Job < ActiveRecord::Base
-
   include Sluggable
 
   validates :name, presence: true, length: { in: 1..75 }, uniqueness: true
@@ -10,5 +9,4 @@ class Job < ActiveRecord::Base
   validates :year_started, presence: true, numericality: { only_integer: true }
   validates :year_finished, presence: true, numericality: { only_integer: true }
   validates :content, presence: true
-
 end

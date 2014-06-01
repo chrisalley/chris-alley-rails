@@ -1,11 +1,10 @@
-class JobsController < ApplicationController  
-  
+class JobsController < ApplicationController
   before_action :load_job, except: [:index, :new, :create]
 
   def index
     @jobs = policy_scope(Job.order("year_finished desc").page(params[:job]).per(100))
   end
-  
+
   def new
     @job = Job.new
     authorize @job
@@ -20,7 +19,7 @@ class JobsController < ApplicationController
       render :new
     end
   end
-  
+
   def update
     if @job.update_attributes(job_params)
       redirect_to jobs_path, notice: "Successfully updated job."
@@ -33,7 +32,7 @@ class JobsController < ApplicationController
     @job.destroy
     redirect_to jobs_path, notice: "Successfully destroyed job."
   end
-  
+
   private
 
   def job_params
@@ -53,5 +52,4 @@ class JobsController < ApplicationController
     @job = Job.find_by url: params[:id]
     authorize @job
   end
-  
 end

@@ -1,24 +1,23 @@
 class UsersController < ApplicationController
-  
   before_action :load_user, except: [:index, :new, :create]
 
   def index
     @users = policy_scope(User.order(:name).page(params[:page]))
   end
-  
+
   def new
     @user = User.new
     authorize @user
   end
-  
+
   def create
     @user = User.new(user_params)
     authorize @user
     if @user.save
       redirect_to users_path, notice: "Registered!"
-    else  
+    else
       render :new
-    end  
+    end
   end
 
   def update
@@ -29,11 +28,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy    
+  def destroy
     @user.destroy
     redirect_to users_path, notice: "Successfully destroyed user."
   end
-  
+
   private
 
   def user_params
@@ -50,5 +49,4 @@ class UsersController < ApplicationController
     @user = User.find_by url: params[:id]
     authorize @user
   end
-
 end

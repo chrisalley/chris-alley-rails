@@ -1,16 +1,15 @@
 class ProjectsController < ApplicationController
-
   before_action :load_project, except: [:index, :new, :create]
 
   def index
     @projects = policy_scope(Project.order("priority desc").page(params[:project]).per(100))
   end
-  
+
   def new
     @project = Project.new
     authorize @project
   end
-  
+
   def create
     @project = Project.new(project_params)
     authorize @project
@@ -20,7 +19,7 @@ class ProjectsController < ApplicationController
       render :new
     end
   end
-  
+
   def update
     if @project.update_attributes(project_params)
       redirect_to projects_path, notice: "Successfully updated project."
@@ -33,7 +32,7 @@ class ProjectsController < ApplicationController
     @project.destroy
     redirect_to projects_path, notice: "Successfully destroyed project."
   end
-  
+
   private
 
   def project_params
@@ -49,10 +48,9 @@ class ProjectsController < ApplicationController
       :publish
     )
   end
-  
+
   def load_project
     @project = Project.find_by url: params[:id]
     authorize @project
   end
-  
 end

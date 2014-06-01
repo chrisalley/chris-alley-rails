@@ -1,7 +1,6 @@
 class PagePolicy < ApplicationPolicy
-  
   class Scope < Struct.new(:user, :scope)
-  
+
     def resolve
       if user
         return scope if user.role? :administrator
@@ -17,5 +16,4 @@ class PagePolicy < ApplicationPolicy
     end
     record.publish?
   end
-
 end

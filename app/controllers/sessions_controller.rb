@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  
   after_action :verify_authorized, except: [:new, :create, :destroy]
 
   def create
@@ -17,9 +16,8 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy  
+  def destroy
     cookies.delete(:authentication_token)
-    redirect_to root_url, notice: "Logged out!"  
+    redirect_to root_url, notice: "Logged out!"
   end
-  
 end
