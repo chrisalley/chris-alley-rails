@@ -12,14 +12,16 @@
       <div id="container">
         <header>
           <h1>Chris Alley</h1>
-          <p>I am an experienced New Zealand based web developer and database administrator. I have previously worked as a Delphi developer, SQL Server DBA, PHP web developer. I am currently employed as a Ruby on Rails web developer.</p>
+          <% unless @about_page.blank? %>
+            <%= raw markdown_to_html @about_page.content %>
+          <% end %>
         </header>
         <nav>
           <ul>
   	        <li><%= link_to "Development Portfolio", root_url %></li>
-            <li><%= link_to "Industry Experience", jobs_path %></li>
+            <li><%= link_to "Experience", jobs_path %></li>
             <li><%= link_to "Qualifications", qualifications_path %></li>
-            <% Page.where(publish: true).each do |page| %>
+            <% @other_pages.each do |page| %>
               <li><%= link_to page.name, "/#{page.url}" %></li>
             <% end %>  
           </ul>

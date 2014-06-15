@@ -8,7 +8,14 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  before_action :load_pages
+
   private
+
+  def load_pages
+    @about_page = Page.where(url: 'about', publish: true).first
+    @other_pages = Page.where(publish: true).where("NOT(url='about')")
+  end
 
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
