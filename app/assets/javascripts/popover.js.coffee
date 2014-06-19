@@ -12,6 +12,6 @@ $(document).on 'ready page:load', ->
     $("div#popover img").attr "height", popover_height
     $("div#popover").fadeIn "fast"
 
-  $("div#popover button").click ->
+  $("div#popover button").click (event) ->
     event.preventDefault()
     $("div#popover").fadeOut "fast"
