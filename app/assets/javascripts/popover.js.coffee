@@ -1,6 +1,6 @@
 $(document).on 'ready page:load', ->
   
-  $("a.popover").click ->
+  $("a.popover").click (event) ->
     event.preventDefault()
     popover_src = $(this).children("img").attr("data-src")
     popover_caption = $(this).children("img").attr("alt")
