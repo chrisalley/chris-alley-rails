@@ -8,6 +8,10 @@ set :user, "chrisalley"
 set :deploy_to, "/home/chrisalley/webapps/chrisalley"
 set :use_sudo, false
 default_run_options[:pty] = true
+set :default_environment, {
+ 'PATH' => "#{deploy_to}/bin:$PATH",
+ 'GEM_HOME' => "#{deploy_to}/gems",
+}
 
 set :scm, "git"
 set :repository, "https://chrisalley@github.com/chrisalley/chris-alley.git"
@@ -25,7 +29,7 @@ namespace :deploy do
   task :symlink_extras do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
-    run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"    
+    run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"
   end
 
   desc "Setup shared directory."
@@ -35,7 +39,7 @@ namespace :deploy do
     put File.read("config/examples/database.yml"), "#{shared_path}/config/database.yml"
     put File.read("config/examples/secrets.yml"), "#{shared_path}/config/secrets.yml"
   end
-  
+
   namespace :assets do
     desc "Precompile assets on local machine and upload them to the server."
     task :precompile, roles: :web, except: {no_release: true} do
