@@ -1,6 +1,6 @@
 $(document).on 'ready page:load', ->
   
-  $("a.popover").click ->
+  $("a.popover").click (event) ->
     event.preventDefault()
     popover_src = $(this).children("img").attr("data-src")
     popover_caption = $(this).children("img").attr("alt")
@@ -12,6 +12,6 @@ $(document).on 'ready page:load', ->
     $("div#popover img").attr "height", popover_height
     $("div#popover").fadeIn "fast"
 
-  $("div#popover button").click ->
+  $("div#popover button").click (event) ->
     event.preventDefault()
     $("div#popover").fadeOut "fast"
